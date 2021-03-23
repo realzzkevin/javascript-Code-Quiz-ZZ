@@ -1,5 +1,6 @@
 var highScores = [];
 var currentScore = 0;
+var remainSeconds = 60;
 
 // all quiz questions will be store in arry quizQuestions.
 var quizQuestions = [];
@@ -28,6 +29,22 @@ console.log(quizQuestions);
 
 function timer (){
 
+    remainSeconds = 60;
+    
+    var timeInterval = setInterval(function () {
+
+        remainSeconds--;
+
+        if(remainSeconds ===0) {
+
+            clearInterval(timeInterval);
+
+            quizOver();
+
+        }
+
+    }, 1000);
+
 }
 
 function dispalyQuestion (question) {
@@ -47,8 +64,12 @@ function saveScores () {
 
 }
 
+function initPage () {
+
+}
+
 function startQuiz(){
 
 }
 
-startQuiz();
+initPage();
