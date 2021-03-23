@@ -1,4 +1,5 @@
 var highScores = [];
+var currentScore = 0;
 
 // all quiz questions will be store in arry quizQuestions.
 var quizQuestions = [];
@@ -29,12 +30,20 @@ function timer (){
 
 }
 
-function dispalyQuestion(question) {
+function dispalyQuestion (question) {
+
 
 }
 
+function quizOver (str) {
 
-function showHighScores() {
+}
+
+function showHighScores () {
+
+}
+
+function saveScores () {
 
 }
 
