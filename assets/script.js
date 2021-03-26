@@ -1,4 +1,3 @@
-
 var remainSeconds = 60;
 var timeInterval;
 var questions = document.getElementById('questions');
@@ -233,10 +232,14 @@ function showHighScores () {
 
     var highScores = JSON.parse(localStorage.getItem('highScores'));
     
-    for (var i = 0; i<highScores.length; i++){
-        var listItem = document.createElement('li');
-        listItem.textContent = highScores[i].initail+' - '+highScores[i].score;
-        orderList.appendChild(listItem);
+    if (highScores != null) {
+
+        for (var i = 0; i<highScores.length; i++){
+            var listItem = document.createElement('li');
+            listItem.textContent = highScores[i].initail+' - '+highScores[i].score;
+            orderList.appendChild(listItem);
+        }
+
     }
     
     choices.appendChild(orderList);
@@ -262,9 +265,6 @@ function showHighScores () {
     });
 }
 
-function saveScores () {
-    
-}
 // delete all child nodes in 3 section elements. 
 function clearPage () {
 
@@ -316,5 +316,3 @@ function initPage () {
 }
 
 initPage();
-
-
