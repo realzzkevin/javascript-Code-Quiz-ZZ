@@ -27,7 +27,7 @@ quizQuestions[1] = {
 };
 
 
-console.log(quizQuestions);
+//console.log(quizQuestions);
 
 
 function timer (){
@@ -267,7 +267,6 @@ function showHighScores () {
 
 // delete all child nodes in 3 section elements. 
 function clearPage () {
-
     
     while (questions.firstChild){
         questions.removeChild(questions.firstChild);
@@ -283,34 +282,32 @@ function clearPage () {
  
 }
 
-function startQuiz(){
-
-    clearPage();
-    timer();
-
-    var qIndex = 0;
-
-    dispalyQuestion(qIndex);
-}
-
-
 
 function initPage () {
-
+    
     var title = document.createElement('h1');
     var intro = document.createElement('p');
     var startBtn = document.createElement('button');
     
-
+    
     title.textContent = "JavaScript Coding Quiz";
     intro.textContent = "do you want to start the quiz?";
     startBtn.textContent = "start";
-
+    
     questions.appendChild(title);
     choices.appendChild(intro);
     choices.appendChild(startBtn);
+    
+    startBtn.addEventListener('click', function() {
+        
+        clearPage();
+        timer();
+        
+        var qIndex = 0;
+        
+        dispalyQuestion(qIndex);      
 
-    startBtn.addEventListener('click', startQuiz);
+    });
 
     displayScore.addEventListener('click', showHighScores);
 }
