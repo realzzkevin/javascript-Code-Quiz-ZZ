@@ -46,6 +46,8 @@ function timer (){
             
             clearInterval(timeInterval);
             
+            clearPage();
+
             testScore();
             
         }
@@ -58,9 +60,6 @@ function timer (){
 
 function dispalyQuestion (index) {
     
-    /*if (index >= quizQuestions.length){
-        return;
-    }*/
     var qTitle = document.createElement('h1');
     var qChoices = document.createElement('ol');
     var correctness = document.createElement('h2');
@@ -73,8 +72,12 @@ function dispalyQuestion (index) {
     for (var i = 0; i < currenQues.answers.length; i++){
 
         var list = document.createElement('li');
+        var btn = document.createElement('button');
 
-        list .innerHTML = '<button class=\'btn\'>'+ currenQues.answers[i]+ '</button>'
+        btn.textContent = currenQues.answers[i];
+        btn.setAttribute('class','choicesBtn');
+
+        list.appendChild(btn);
         qChoices.appendChild(list);
         
     }
@@ -88,11 +91,13 @@ function dispalyQuestion (index) {
 
         if (event.target.textContent === currenQues.correctAnswer){
 
+            correctness.style.color = 'var(--rightGreen)';
             correctness.textContent = 'Correct';
             
         }else {
 
-            correctness.textContent = 'Wrong'
+            correctness.style.color = 'var(--alertRed)';
+            correctness.textContent = 'Wrong';
 
             if (remainSeconds >= 10){
 
@@ -180,7 +185,7 @@ function testScore () {
         };
         
         if (stuInit === '') {
-            statusbar.firstChild.textContent = "Initail cannot be blank";
+            alert("Initail cannot be blank");
         }else {
             highScores = JSON.parse(localStorage.getItem('highScores'));
 
@@ -287,8 +292,7 @@ function initPage () {
     
     var title = document.createElement('h1');
     var intro = document.createElement('p');
-    var startBtn = document.createElement('button');
-    
+    var startBtn = document.createElement('button');    
     
     title.textContent = "JavaScript Coding Quiz";
     intro.textContent = "do you want to start the quiz?";

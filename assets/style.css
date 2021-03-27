@@ -1,3 +1,90 @@
 *{
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    box-sizing: border-box;
+}
+:root {
+    --blue : #3391E8;
+    --whiteFont: rgb(255, 255, 255);
+    --rightGreen: rgb(27, 187, 27);
+    --alertRed: rgb(209, 25, 25);
+}
+
+body {
+    /*max-width: 70%;
+    display : flex;
+    flex-direction: column;
+    justify-content: center;
+    */
+}
+
+header {
+    display : flex;
+    justify-content: center;
+}
+
+nav {
+    width: 70%;
+    display : flex;
+    justify-content: space-between;
+    align-items: baseline;
+    background-color: var(--blue);
+    padding: 5px;
+    color: var(--whiteFont);
+}
+a, a:visited {
+    text-decoration: none;
+    color: var(--whiteFont);
+}
+
+main {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+section {
+    width: 70%;
+}
+
+#choices {
+    
+    display : flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    text-align: center;
+}
+
+/*ol {
+    width: fit-content;
+    display : flex;
+    flex-direction: column;
+    justify-content: center;
+}*/
+li {
+    margin: 3px;
+}
+
+.choicesBtn {
+    background-color: lightblue;
+    border-radius: 10%;
+    border-color: lightblue;
+}
+.choicesBtn:hover{
+    background-color: rgb(150, 198, 216);
+}
+
+.optionBtn {
+
+}
+
+.optionBtn:hover{
+
+}
+
+footer {
+    text-align: center;
 }
