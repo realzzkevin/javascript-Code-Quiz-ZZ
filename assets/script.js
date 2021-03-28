@@ -1,35 +1,65 @@
+
 var remainSeconds = 60;
+//global timeInterval, allow program to stop time in any functions.
 var timeInterval;
+// questions holds title and quiz questions, Choices holds list of answers and highScores,, Status bar holds status and buttons.
 var questions = document.getElementById('questions');
 var choices = document.getElementById('choices');
 var statusBar = document.getElementById('status-bar');
 var displayScore = document.getElementById('highScores');
 
-// all quiz questions will be store in arry quizQuestions.
-var quizQuestions = [];
-//sample question object.
-quizQuestions[0] = {
+// all quiz questions will be store in the quizQuestions array.
+// five simple javascript questions.
+var quizQuestions = [
 
-    question : "who invented JavaScript",
-
-    answers : ["Douglas crockford", "Sheryl Sandberg", "Brendan Eich"],
-
-    correctAnswer : "Brendan Eich"
-};
-
-quizQuestions[1] = {
-
-    question : "inside with HTML elemment do we put the JavaScript?",
+    {
+        question : "Which of the following function of String object extracts a section of a string and returns a new string?",
     
-    answers : ["javascript", "header", "body", "script"],
+        answers : ["slice()", "split()", "replace()", "search()"],
     
-    correctAnswer : "script"
-};
+        correctAnswer : "slice()"
+    },
+
+    {
+
+        question : "Inside whitch HTML element do we put the JavaScript?",
+        
+        answers : ["javascript", "header", "body", "script"],
+        
+        correctAnswer : "script"
+    },
+
+    {
+
+        question : "How do you write \"Hello World\" in an alert box?",
+        
+        answers : ["msg(\"Hello World\");" , "msgBox(\"Hello World\");", "alertBox(\"Hello Word\");", "alert(\"Hello World\");"],
+    
+        correctAnswer : "alert(\"Hello World\");"
+    
+    },
+
+    {
+        question : "How do you create a function in JavaScript?",
+
+        answers : ["function = myFunction()", "function myFunction()", "function:myFunction()", "myFunction()"],
+
+        correctAnswer : "function myFunction()"
+    },
+
+    {   
+        question : "How to write a if statement for executing some code if \"i\" is not eqaul to 5?",
+
+        answers : ["if (i<>5)", "if(i != 5)", "if i <> 5", "if i =!5 then"],
+
+        correctAnswer : "if(i != 5)"
+
+    }
+];
 
 
-//console.log(quizQuestions);
 
-
+// the time counter, set timer to 60 seconds. Finish test when time run out.
 function timer (){
     
     remainSeconds = 60;
@@ -42,7 +72,7 @@ function timer (){
 
         counter.textContent = remainSeconds+" seconds remaining"  
         
-        if(remainSeconds <=0) {
+        if(remainSeconds <= 0) {
             
             clearInterval(timeInterval);
             
@@ -58,6 +88,7 @@ function timer (){
     
 }
 
+// display 
 function dispalyQuestion (index) {
     
     var qTitle = document.createElement('h1');
@@ -116,24 +147,47 @@ function dispalyQuestion (index) {
 
             setTimeout(function(){
 
-                clearPage();
+                while (statusBar.firstChild){
+                    statusBar.removeChild(statusBar.firstChild);
+                }
 
-                dispalyQuestion(index);
+            }, 500);
 
-            }, 1000);
+            while (questions.firstChild){
+                questions.removeChild(questions.firstChild);
+            }
+        
+            while (choices.firstChild){
+                choices.removeChild(choices.firstChild);
+            }
+
+            dispalyQuestion(index);
 
 
         } else if(index >= quizQuestions.length){
-
+            // when index reach the end of quizQuestions array, stop timer, end quiz, call function to display score.
             clearInterval(timeInterval);
 
             setTimeout(function(){
 
-                clearPage();
+                while (statusBar.firstChild){
+                    statusBar.removeChild(statusBar.firstChild);
+                }
+               // clearPage();
 
-                testScore();
+                //testScore();
 
-            }, 1000);
+            }, 500);
+
+            while (questions.firstChild){
+                questions.removeChild(questions.firstChild);
+            }
+        
+            while (choices.firstChild){
+                choices.removeChild(choices.firstChild);
+            }
+
+            testScore();
 
         } 
 
@@ -164,6 +218,7 @@ function testScore () {
     stuName.setAttribute('type', 'text');
     stuName.setAttribute('id', 'initial');
     button.setAttribute('type', 'submit');
+    button.setAttribute('class', 'optionBtn');
     
 
     questions.appendChild(title);
@@ -225,6 +280,8 @@ function testScore () {
 
 function showHighScores () {
 
+    clearInterval(timeInterval);
+    displayScore.textContent='';
     clearPage();
 
     var title = document.createElement('h1');
@@ -234,15 +291,16 @@ function showHighScores () {
 
     title.textContent = 'HighScores';
     questions.appendChild(title);
-
+    // read all highscore from local storage.
     var highScores = JSON.parse(localStorage.getItem('highScores'));
-    
+    //display highscore in a ordered list.
     if (highScores != null) {
 
         for (var i = 0; i<highScores.length; i++){
             var listItem = document.createElement('li');
             listItem.textContent = highScores[i].initail+' - '+highScores[i].score;
             orderList.appendChild(listItem);
+            listItem.style.backgroundColor ="var(--spaceGray)";
         }
 
     }
@@ -252,14 +310,18 @@ function showHighScores () {
     goBackBtn.textContent = "Go Back";
     clearScoreBtn.textContent = "Clear HighScores";
 
+    goBackBtn.setAttribute('class', 'optionBtn');
+    clearScoreBtn.setAttribute('class', 'optionBtn');
+
     statusBar.appendChild(goBackBtn);
     statusBar.appendChild(clearScoreBtn);
-
+    //go back button will start the quiz again.
     goBackBtn.addEventListener ('click', function(){
         clearPage();
         initPage();
     });
 
+    // ask user if they want to delete all highscores. if confirmed, delete list from page and local storage.
     clearScoreBtn.addEventListener ('click', function(){
     
         if (confirm('Delete all High Scores?')) {
@@ -297,19 +359,19 @@ function initPage () {
     title.textContent = "JavaScript Coding Quiz";
     intro.textContent = "do you want to start the quiz?";
     startBtn.textContent = "start";
+    startBtn.setAttribute('class', 'optionBtn');
     
     questions.appendChild(title);
     choices.appendChild(intro);
     choices.appendChild(startBtn);
     
+    // when click, clear page, start timer, display first question;
     startBtn.addEventListener('click', function() {
         
         clearPage();
         timer();
-        
-        var qIndex = 0;
-        
-        dispalyQuestion(qIndex);      
+                
+        dispalyQuestion(0);      
 
     });
 
