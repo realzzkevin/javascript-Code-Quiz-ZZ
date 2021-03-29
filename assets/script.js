@@ -7,6 +7,7 @@ var questions = document.getElementById('questions');
 var choices = document.getElementById('choices');
 var statusBar = document.getElementById('status-bar');
 var displayScore = document.getElementById('highScores');
+var counter = document.getElementById("timeCounter");
 
 // all quiz questions will be store in the quizQuestions array.
 // five simple javascript questions.
@@ -62,15 +63,13 @@ var quizQuestions = [
 // the time counter, set timer to 60 seconds. Finish test when time run out.
 function timer (){
     
-    remainSeconds = 60;
-
-    var counter = document.getElementById("timeCounter");
+    remainSeconds = 60;   
 
     
     timeInterval = setInterval(function () { 
         
 
-        counter.textContent = remainSeconds+" seconds remaining"  
+        counter.textContent = remainSeconds+" seconds remaining."  
         
         if(remainSeconds <= 0) {
             
@@ -88,7 +87,7 @@ function timer (){
     
 }
 
-// display 
+// display question and display answer choices in a ordered list.
 function dispalyQuestion (index) {
     
     var qTitle = document.createElement('h1');
@@ -115,7 +114,7 @@ function dispalyQuestion (index) {
 
     choices.appendChild(qChoices);
 
-
+    //when clicked, check if the answer is right.
     qChoices.addEventListener('click', function(event) {
 
         console.log(currenQues.correctAnswer);
@@ -281,7 +280,7 @@ function testScore () {
 function showHighScores () {
 
     clearInterval(timeInterval);
-    displayScore.textContent='';
+    counter.textContent='';
     clearPage();
 
     var title = document.createElement('h1');
@@ -356,8 +355,9 @@ function initPage () {
     var intro = document.createElement('p');
     var startBtn = document.createElement('button');    
     
+    counter.textContent = "60 seconds remaining.";
     title.textContent = "JavaScript Coding Quiz";
-    intro.textContent = "do you want to start the quiz?";
+    intro.textContent = "Try to answer the following JavaScript questions within the time limit. Every incorrect answers will penatize your score & time by 10 seconds.";
     startBtn.textContent = "start";
     startBtn.setAttribute('class', 'optionBtn');
     
@@ -379,3 +379,4 @@ function initPage () {
 }
 
 initPage();
+
