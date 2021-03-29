@@ -21,16 +21,21 @@ This project is a timed JavaScript coding quiz, that written in JavaScript, HTML
 This project is using the [MIT](./LICENSE) license.
 
 ## Screenshots
+
 * Quiz start
+  
 ![Quiz start](assets/screenshots/startpage.png)
 
 * Question page
+
 ![Question page](assets/screenshots/questionpage.png)
 
 * Submit Highscores
+
 ![Submit Highscores](assets/screenshots/endquizpage.png)
 
 * Highscores
+
 ![Highscores](assets/screenshots/highscores.png)
 
 ## Link
